@@ -6,7 +6,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('https://img.freepik.com/free-psd/3d-rendering-questions-background_23-2151455632.jpg?semt=ais_hybrid&w=740&q=80');
+    background-image: url('./images/image.png');
     background-size: cover;     
     background-repeat: no-repeat; 
     background-position: center; 
