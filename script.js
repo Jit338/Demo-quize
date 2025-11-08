@@ -50,7 +50,32 @@ function show(){
         option[i].innerText="";
         option[i].innerText = number[i]+options[y][i];
         option[i].style.backgroundColor="";
+        option[i].style="";
     }
+}
+
+
+function increase(k){
+    option[k].style.height= "27px";
+    option[k].style.width= "220px";
+    option[k].style.marginBottom= "1px";
+    option[k].style.marginTop= "1px";
+}
+
+function ans_marked(k){
+    option[k].style.width="190px"
+    option[k].style.borderRightWidth="20px"
+    option[k].style.borderRightColor="rgb(1, 182, 59)"
+    option[k].style.clipPath="inset(0 round 12px)"
+    increase(k);
+}
+
+function err_marked(k){
+    option[k].style.width="190px"
+    option[k].style.borderRightWidth="20px"
+    option[k].style.borderRightColor="red"
+    option[k].style.clipPath="inset(0 round 12px)"
+    increase(k);
 }
 
 function checked(a,b){
@@ -83,40 +108,41 @@ function checked(a,b){
 
                 if(c==ans[y][j] && j!=2){
                     if(option[c].innerText==number[c]+options[y][c]){
-                        option[c].style.backgroundColor = "rgb(190, 171, 47)";
+                        ans_marked(c);
                         option[c].innerText+= "✓";
                         // is_wrong=0;
                         break;
                     }else{
                         option[c].innerText=number[c]+options[y][c];
+                        option[c].style="";
                         option[c].innerText+= "✓";
-                        option[c].style.backgroundColor = "rgb(190, 171, 47)";
+                        ans_marked(c);
                         // is_wrong=0;
                         break;
                     }
                 }else if(c!=ans[y][j] && j!=2){
                     if(option[c].innerText != number[c]+options[y][c]+"✕"){
                         option[c].innerText+="✕";
-                        option[c].style.backgroundColor = "rgb(255, 0, 0)";
+                        err_marked(c);
                         // is_wrong++;
                     }
                 }
                 else if(j==2){
                     if(option[ans[y][0]].innerText!=number[0]+options[y][0]+"✓" && option[ans[y][0]].innerText!=number[0]+options[y][0]+"✕"){
-                        option[ans[y][0]].style.backgroundColor= "rgb(190, 171, 47)";
+                        ans_marked(ans[y][0]);
                     }
                     if(option[ans[y][1]].innerText!=number[0]+options[y][1]+"✓" && option[ans[y][1]].innerText!=number[0]+options[y][1]+"✕"){
-                        option[ans[y][1]].style.backgroundColor= "rgb(190, 171, 47)";
+                        ans_marked(ans[y][1]);
                     }
                 }
             }
 
             if(n==1){
                 if(option[ans[y][0]].innerText!=number[ans[y][0]]+options[y][0]+"✓" && option[ans[y][0]].innerText!=number[ans[y][0]]+options[y][0]+"✕"){
-                    option[ans[y][0]].style.backgroundColor= "rgb(190, 171, 47)";
+                    ans_marked(ans[y][0]);
                 }
                 if(option[ans[y][1]].innerText!=number[ans[y][1]]+options[y][1]+"✓" && option[ans[y][1]].innerText!=number[ans[y][1]]+options[y][1]+"✕"){
-                    option[ans[y][1]].style.backgroundColor= "rgb(190, 171, 47)";
+                    ans_marked(ans[y][1]);
                 }
             }
 
@@ -143,7 +169,7 @@ function arr(k){
     else if(c==3){p=k;}
     else if(c==4){q=k;}
     c++;
-    option[k].style.backgroundColor = "rgba(190, 171, 47, 0.568)";
+    increase(k);
 }
 
 function colored(){
