@@ -6,10 +6,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('./images/image.png');
-    background-size: cover;     
-    background-repeat: no-repeat; 
-    background-position: center; 
+    background-color: #020d20;
 }
 #previous{
     visibility: hidden;
@@ -23,19 +20,17 @@ body{
 }
 
 .btn{
-    color: blue;
+    color: white;
     font-weight: 400;
-    background: linear-gradient(red,rgb(255, 128, 0));
+    background: linear-gradient(#09347e,#09347e);
     border: none;
-    border: 1.5px solid blue;
-    border-radius: 2px;
+    border-radius: 10px;
     transition-property: all;
     transition-duration: .3s;
 }
 
 #container{
     zoom: 1.5;
-    background: linear-gradient(blue,red);
     height: 247.5px;
     width: 230px;
     padding: 20px;
@@ -45,7 +40,11 @@ body{
     align-items: center;
     flex-direction: column;
     margin-bottom: 30px;
-    box-shadow: 4px 7px 7px rgb(91, 83, 83);
+    box-shadow: -7px 7px 120px #09347e , 7px 7px 20px #09347e;
+    background-image: url('https://img.freepik.com/free-photo/abstract-gradient-neon-lights_23-2149279139.jpg?semt=ais_hybrid&w=740&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 #question{
     width: 230px;
@@ -57,7 +56,7 @@ body{
 #timer{
     height: 20px;
     width: 210px;
-    color: black;
+    color: white;
 }
 #text{
     height: 60px;
@@ -73,11 +72,11 @@ body{
     height: 23px;
     width: 210px;
     padding-left: 10px;
-    background-color: blue;
+    background: linear-gradient(to top right , #020d20, #09347e );
     margin-bottom: 3px;
     margin-top: 3px;
-    border: 1.5px solid white;
-    border-radius: 5px;
+    border: 0px solid rgb(1, 182, 59);
+    border-radius: 12px;
     color: white;
     display: flex;
     align-items: center;
@@ -98,13 +97,13 @@ body{
 }
 
 #score{
-    height: 17.867px;
-    width: 45;
+    text-align: center;
+    height: 20px;
+    width: 70px;
 }
 
 #check{
-    border-color: rgb(1, 1, 190);
-    background: blue;
+    border-color: #09347e;
     color: white;
 }
 #check:hover{
