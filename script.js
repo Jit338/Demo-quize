@@ -19,202 +19,94 @@ const interval = setInterval(() => {
 
 
 
-let qn = document.getElementById("number");
-let text = document.getElementById("text");
-let options=[["String","Integer","Undefined","Float"],["getElementById()","getElementsByName","querySelector","createElement"],["if","for","while","switch"],["click","hover","keydown","press"],["let","val","new","func"]];
 
+let options=[["String","Integer","Undefined","Float"],["getElementById()","getElementsByName","querySelector","createElement"],["if","for","while","switch"],["click","hover","keydown","press"],["let","val","new","func"]];
+let rel_ans= [[0,-1,2,-1],[0,-1,2,-1],[-1,1,2,-1],[0,-1,2,-1],[0,-1,2,-1]];
 let question = ["Which of the following are valid JavaScript data types?",
   "Which of these methods can be used to select an HTML element in JavaScript?",
   "Which of the following are looping structures in JavaScript?",
   "Which of the following event types are valid DOM events?",
-  "Which of these are JavaScript keywords?"];
+  "Which of these are JavaScript keywords?"
+];
 
-text.innerText="Q."+question[0];
-let ans = [[0,2],[0,2],[1,2],[0,2],[0,2]];
-let number=['A.','B.','C.','D.'];
-let y=0;
-let z=1;
+let option = document.getElementsByClassName("option");
 
-let option = document.querySelectorAll(".option");
-let btn = document.querySelectorAll(".btn");
-let is_checked = 0;
-let point = 0;
-btn[2].innerText += point;
-let next = btn[3];
-
-let a=-1,b=-1,p=-1,q=-1,c=1,n=1;
-let is_wrong=0;
-
-function show(){
+function show(a){
+    document.getElementById("text").innerText = question[a];
+    let q = ['A','B','C','D'];
     for(let i=0;i<4;i++){
-        option[i].innerText="";
-        option[i].innerText = number[i]+options[y][i];
-        option[i].style.backgroundColor="";
-        option[i].style="";
+        option[i].innerText= q[i] + ". "+options[a][i];
     }
 }
 
+show(0);
+let ans = [-1,-1,-1,-1];
+let qn=0;
+let number = document.getElementById("number");
+let submit = document.getElementById("submit");
+let container = document.getElementById("container");
 
-function increase(k){
-    option[k].style.height= "27px";
-    option[k].style.width= "220px";
-    option[k].style.marginBottom= "1px";
-    option[k].style.marginTop= "1px";
-}
-
-function ans_marked(k){
-    option[k].style.width="190px"
-    option[k].style.borderRightWidth="20px"
-    option[k].style.borderRightColor="rgb(1, 182, 59)"
-    option[k].style.clipPath="inset(0 round 12px)"
-    increase(k);
-}
-
-function err_marked(k){
-    option[k].style.width="190px"
-    option[k].style.borderRightWidth="20px"
-    option[k].style.borderRightColor="red"
-    option[k].style.clipPath="inset(0 round 12px)"
-    increase(k);
-}
-
-function checked(a,b){
-    if(is_checked==0){
-        let c;
-        for(let i=1;i<=n;i++){
-            if(i==1){
-                c=a;
-                if(b!=-1){
-                    n=2;
-                }
-            }
-            else if(n==2){
-                c=b;
-                if(p!=-1){
-                    n=3;
-                }
-            }
-            else if(n==3){
-                c=p;
-                if(q!=-1){
-                    n=4;
-                }
-            }
-            else if(n==4){
-                c=q;
-            }
-
-            for(let j=0;j<3;j++){
-
-                if(c==ans[y][j] && j!=2){
-                    if(option[c].innerText==number[c]+options[y][c]){
-                        ans_marked(c);
-                        option[c].innerText+= "✓";
-                        // is_wrong=0;
-                        break;
-                    }else{
-                        option[c].innerText=number[c]+options[y][c];
-                        option[c].style="";
-                        option[c].innerText+= "✓";
-                        ans_marked(c);
-                        // is_wrong=0;
-                        break;
-                    }
-                }else if(c!=ans[y][j] && j!=2){
-                    if(option[c].innerText != number[c]+options[y][c]+"✕"){
-                        option[c].innerText+="✕";
-                        err_marked(c);
-                        // is_wrong++;
-                    }
-                }
-                else if(j==2){
-                    if(option[ans[y][0]].innerText!=number[0]+options[y][0]+"✓" && option[ans[y][0]].innerText!=number[0]+options[y][0]+"✕"){
-                        ans_marked(ans[y][0]);
-                    }
-                    if(option[ans[y][1]].innerText!=number[0]+options[y][1]+"✓" && option[ans[y][1]].innerText!=number[0]+options[y][1]+"✕"){
-                        ans_marked(ans[y][1]);
-                    }
-                }
-            }
-
-            if(n==1){
-                if(option[ans[y][0]].innerText!=number[ans[y][0]]+options[y][0]+"✓" && option[ans[y][0]].innerText!=number[ans[y][0]]+options[y][0]+"✕"){
-                    ans_marked(ans[y][0]);
-                }
-                if(option[ans[y][1]].innerText!=number[ans[y][1]]+options[y][1]+"✓" && option[ans[y][1]].innerText!=number[ans[y][1]]+options[y][1]+"✕"){
-                    ans_marked(ans[y][1]);
-                }
-            }
-
+for(let i=0;i<4;i++){
+    option[i].onclick=()=>{
+        if(option[i].style.backgroundColor==''){
+            option[i].style.backgroundColor = "rgb(169, 169, 241)";
+            ans[i]=i;
+        }else{
+            option[i].style.backgroundColor = "";
+            ans[i]=-1;
         }
+    };
+};
 
-        for(let l=0;l<4;l++){
-            if(option[l].innerText==number[l]+options[y][l]+"✕"){is_wrong=1;}
+let check = document.getElementById("check");
+let score = document.getElementById("score");
+let next = document.getElementById("next");
+let is_checked = 0;
+let p =0;
+let k =0;
+check.onclick=()=>{
+    is_checked=1;
+    let is_correct=1;
+    for(let i=0;i<4;i++){
+        if(rel_ans[k][i]!=ans[i]){
+            option[i].style.backgroundColor="red";
+            is_correct = 0;
+        }else if(rel_ans[k][i]==ans[i] && ans[i]!=-1){
+            option[i].style.backgroundColor="lightgreen";
         }
+    };
 
-        if(option[ans[y][0]].innerText==number[ans[y][0]]+options[y][ans[y][0]]+"✓"  &&  option[ans[y][1]].innerText==number[ans[y][1]]+options[y][ans[y][1]]+"✓" && is_wrong===0){
-            btn[2].innerText = "Score=";
-            point+=10;
-            btn[2].innerText = btn[2].innerText + point;
+    for(let i=0;i<4;i++){
+        if(rel_ans[k][i]!=-1){
+            option[i].style.backgroundColor = "lightgreen";
         }
-
-        is_checked++;
     }
-}
 
-function arr(k){
-    console.log(k);
-    if(c==1){a=k;}
-    else if(c==2){b=k;}
-    else if(c==3){p=k;}
-    else if(c==4){q=k;}
-    c++;
-    increase(k);
-}
-
-function colored(){
-    for(let k=0;k<4;k++){
-        option[k].onclick=()=>arr(k);
+    if(is_correct==1){
+        p+=10;
+        score.innerText = "score = " + p;
     }
-}
+    k++;
+    
+};
 
-
-function deColored(){
-    for(let k=0;k<4;k++){
-        option[k].onclick=null;
-    }
-}
-
-show();
-colored();
-
-function upgrade(){
-    if(a!=-1 && b!=-1){checked(a,b);}
-    z++;
-    if(z==5){
-        next.style.visibility = "hidden";
-    }
-    text.innerText="Q.";
-    text.innerText="Q."+question[z-1];
-    qn.innerText = "";
-    qn.innerText = z + "/5";
-    y++;
-    c=1;
-    n=1;
-    a=-1;
-    b=-1;
-    p=-1;
-    q=-1;
+next.onclick=()=>{
+    ans=[-1,-1,-1,-1];
     is_checked=0;
-    is_wrong=0;
-    show();
-}
+    qn++;
+    if(qn+1==5){
+        next.style.visibility = "hidden";
+        submit.style.visibility = "visible";
+    }
+    number.innerText=(qn+1) +"/5";
+    show(qn);
+    for(let i=0;i<4;i++){
+        option[i].style.backgroundColor = "";
+    }
+};
 
-btn[0].addEventListener("click",()=>{
-    checked(a,b);
-});
-
-next.addEventListener("click",()=>{
-    upgrade();
-});
-
+submit.onclick=()=>{
+    container.innerText = "";
+    let str = `Your Score is = ${p}`;
+    container.innerHTML = `<h2 style="color: blue;">${str}</h2>`;
+};
